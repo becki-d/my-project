@@ -377,70 +377,110 @@
         <button class="cta-button" onclick="window.location.href='community.html'">Explore Community Wall</button>
     </section>
 
-
 <!-- CONTACT FORM -->
-
-    <section id="contact" class="contact-section">
+<section id="contact" class="contact-section">
     <h2>Contact Us</h2>
-    <form id="contact-form" class="contact-form" method="POST">
-
-        <!-- Left Column -->
-        <div class="form-group">
-            <label for="first-name">First Name</label>
-            <input type="text" id="first-name" name="first-name" required 
-                   minlength="2" maxlength="50" 
-                   pattern="[A-Za-z]+" title="Letters only">
-        </div>
+    <div class="contact-form-container">
+        <form id="contact-form" class="contact-form" method="POST">
+            <!-- Left Column -->
+            <div class="form-group">
+                <div class="input-container">
+                    <input type="text" id="first-name" name="first-name" required 
+                           minlength="2" maxlength="50" placeholder=" "
+                           pattern="[A-Za-z]+" title="Letters only">
+                    <label for="first-name">First Name</label>
+                </div>
+            </div>
 
             <div class="form-group">
-            <label for="last-name">Last Name</label>
-            <input type="text" id="last-name" name="last-name" required
-                   minlength="2" maxlength="50" 
-                   pattern="[A-Za-z]+" title="Letters only">
-        </div>
+                <div class="input-container">
+                    <input type="text" id="last-name" name="last-name" required
+                           minlength="2" maxlength="50" placeholder=" "
+                           pattern="[A-Za-z]+" title="Letters only">
+                    <label for="last-name">Last Name</label>
+                </div>
+            </div>
 
-        <!-- Right Column -->
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required
-                   maxlength="100">
-        </div>
-    
-        
-        <div class="form-group">
-            <label for="subject">Subject</label>
-            <input type="text" id="subject" name="subject" required
-                   maxlength="150">
-        </div>
-        
-        <!-- Full Width Message Field -->
-        <div class="form-group full-width">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required
-                      maxlength="2000"></textarea>
-        </div>
-        
-        <!-- Submit Button Container -->
-        <div class="button-container">
-            <button type="button" class="cta-button" id="submit-btn">
-                Send Message
-            </button>
-        </div>
-    </form>
-    
-    <!-- Response Messages -->
-    <div id="form-response" class="form-response"></div>
+            <!-- Right Column -->
+            <div class="form-group">
+                <div class="input-container">
+                    <input type="email" id="email" name="email" required
+                           maxlength="100" placeholder=" ">
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="input-container">
+                    <input type="text" id="subject" name="subject" required
+                           maxlength="150" placeholder=" ">
+                    <label for="subject">Subject</label>
+                </div>
+            </div>
+
+            <!-- Message -->
+            <div class="form-group message">
+                <div class="input-container">
+                    <textarea id="message" name="message" required placeholder=" "></textarea>
+                    <label for="message">Message</label>
+                </div>
+            </div>
+
+            <!-- Attachment - Fixed button -->
+            <div class="form-group attachment">
+                <div class="attachment-wrapper">
+                    <label for="file-input" class="attachment-button">Add Attachment</label>
+                    <input type="file" id="file-input" name="attachment">
+                    <span class="attachment-filename" id="filename">No file chosen</span>
+                </div>
+            </div>
+
+            <!-- Terms -->
+            <div class="form-group terms">
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <span class="terms-text">
+                        I've read and agree with the <a href="/terms" target="_blank">Terms Of Service</a> 
+                        and <a href="/privacy" target="_blank">Privacy Policy</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="button-container">
+                <button type="submit" class="cta-button">Send Message</button>
+            </div>
+        </form>
+    </div>
 </section>
 
-<!-- hCaptcha Modal -->
-<div id="hcaptcha-modal" class="hcaptcha-modal">
-    <div class="hcaptcha-modal-content">
+<!-- Fixed hCaptcha Modal -->
+<div class="hcaptcha-modal" id="hcaptcha-modal">
+    <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h3>Please verify you're human</h3>
+        <p>Complete the hCaptcha to continue</p>
         <div class="h-captcha" data-sitekey="your-site-key"></div>
-        <button id="verify-captcha" class="cta-button">Verify</button>
-        <button id="cancel-captcha" class="cancel-btn">Cancel</button>
+        <div class="modal-buttons">
+            <button class="cta-button" id="verify-btn">Verify</button>
+            <button class="cta-button secondary" id="cancel-btn">Cancel</button>
+        </div>
     </div>
 </div>
 
+<!-- Fixed hCaptcha Modal -->
+<div class="hcaptcha-modal" id="hcaptcha-modal">
+    <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h3>Please verify you're human</h3>
+        <p>Complete the hCaptcha to continue</p>
+        <div class="h-captcha" data-sitekey="your-site-key"></div>
+        <div class="modal-buttons">
+            <button class="cta-button" id="verify-btn">Verify</button>
+            <button class="cta-button secondary" id="cancel-btn">Cancel</button>
+        </div>
+    </div>
+</div>
 
 
     <footer>
@@ -496,7 +536,6 @@
             hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
         });
     </script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const contactForm = document.getElementById('contact-form');
@@ -552,6 +591,25 @@
                 alert('Please complete the hCaptcha verification');
             }
         });
+    });
+</script>
+
+<script>
+    // File attachment handler
+    document.getElementById('file-input').addEventListener('change', function(e) {
+        const fileName = e.target.files[0] ? e.target.files[0].name : 'No file chosen';
+        document.getElementById('filename').textContent = fileName;
+    });
+
+    // hCaptcha modal handlers
+    const modal = document.getElementById('hcaptcha-modal');
+    document.querySelector('.modal-close').addEventListener('click', () => modal.style.display = 'none');
+    document.getElementById('cancel-btn').addEventListener('click', () => modal.style.display = 'none');
+    
+    // Form submission handler
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        modal.style.display = 'flex';
     });
 </script>
 
