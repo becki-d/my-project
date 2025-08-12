@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MU.SYNC | Login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Restored original login styles */
+        :root {
+            --bg-dark: #272727;
+            --font-cream: #fffaf3;
+            --accent-purple: #9c4dff;
+            --accent-orange: #ff7d3a;
+            --card-dark: #1e1e1e;
+            --hover-light: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--font-cream);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-container {
+            background: rgba(30, 30, 30, 0.6);
+            border: 1px solid rgba(255, 250, 243, 0.1);
+            border-radius: 12px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 450px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-orange));
+             -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 250, 243, 0.05);
+            border: 1px solid rgba(255, 250, 243, 0.1);
+            border-radius: 8px;
+            color: var(--font-cream);
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 0 2px rgba(156, 77, 255, 0.2);
+        }
+
+        /* Updated login button - now matches input width exactly */
+        .cta-button {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-orange));
+            color: white;
+            border: none;
+            padding: 1rem;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(156, 77, 255, 0.5);
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            box-shadow: 0 0 25px rgba(156, 77, 255, 0.8);
+            /* Removed translateY transform */
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 2rem 0;
+            color: rgba(255, 250, 243, 0.5);
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid rgba(255, 250, 243, 0.1);
+        }
+
+        .divider::before {
+            margin-right: 1rem;
+        }
+
+        .divider::after {
+            margin-left: 1rem;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .signup-link a {
+            color: var(--accent-purple);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Static social login styles */
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: var(--font-cream);
+            font-size: 1.2rem;
+            /* Removed transform transition */
+            cursor: pointer;
+        }
+
+        /* Color branding only - no movement */
+        .social-btn.google { color: #DB4437; }
+        .social-btn.apple { color: #A2AAAD; }
+        .social-btn.facebook { color: #4267B2; }
+
+        /* Subtle hover effect without movement */
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">MU.SYNC</div>
+        <h2>Welcome back</h2>
+        
+        <form>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="your@email.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            
+            <button type="submit" class="cta-button">Log In</button>
+            
+            <div class="divider">or</div>
+            
+            <div class="social-login">
+                <button class="social-btn google" title="Sign in with Google">
+                    <i class="fab fa-google"></i>
+                </button>
+                <button class="social-btn apple" title="Sign in with Apple">
+                    <i class="fab fa-apple"></i>
+                </button>
+                <button class="social-btn facebook" title="Sign in with Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </button>
+            </div>
+            
+            <div class="signup-link">
+                Don't have an account? <a href="signup.html">Sign up</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
