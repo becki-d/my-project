@@ -1,0 +1,52 @@
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== Feature boxes */
+
+.feature-card {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background: var(--card-dark);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: transform 0.3s;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    background: 
+        linear-gradient(135deg, 
+            transparent 0%, 
+            rgba(156, 77, 255, 0.05) 30%, 
+            transparent 70%);
+    z-index: -1;
+    animation: boomerang 8s infinite linear;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: inherit;
+}
+
+.feature-card:hover::before {
+    opacity: 0.3;
+}
+
+@keyframes boomerang {
+    0% { transform: translateX(-100%) translateY(-100%); }
+    50% { transform: translateX(100%) translateY(100%); }
+    100% { transform: translateX(-100%) translateY(-100%); }
+}
+
+
+

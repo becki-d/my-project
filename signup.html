@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MU.SYNC | Create Account</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Restored original signup styles with adjustments */
+        :root {
+            --bg-dark: #272727;
+            --font-cream: #fffaf3;
+            --accent-purple: #9c4dff;
+            --accent-orange: #ff7d3a;
+            --card-dark: #1e1e1e;
+            --hover-light: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--font-cream);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .signup-container {
+            background: rgba(30, 30, 30, 0.6);
+            border: 1px solid rgba(255, 250, 243, 0.1);
+            border-radius: 12px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 450px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 250, 243, 0.05);
+            border: 1px solid rgba(255, 250, 243, 0.1);
+            border-radius: 8px;
+            color: var(--font-cream);
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        /* Specifically widened the dropdown */
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fffaf3'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.8rem center;
+            background-size: 1.2rem;
+            padding-right: 2.5rem;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 0 2px rgba(156, 77, 255, 0.2);
+        }
+
+        /* Updated button to match input width */
+        .cta-button {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-orange));
+            color: white;
+            border: none;
+            padding: 1rem;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(156, 77, 255, 0.5);
+            margin-top: 1.5rem;
+        }
+
+        .cta-button:hover {
+            box-shadow: 0 0 25px rgba(156, 77, 255, 0.8);
+        }
+
+        .account-type {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .account-type label {
+            flex: 1;
+            text-align: center;
+            padding: 0.8rem;
+            background: rgba(255, 250, 243, 0.05);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .account-type input[type="radio"] {
+            display: none;
+        }
+
+        .account-type input[type="radio"]:checked + label {
+            background: rgba(156, 77, 255, 0.2);
+            border: 1px solid var(--accent-purple);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .login-link a {
+            color: var(--accent-purple);
+            text-decoration: none;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="logo">MU.SYNC</div>
+        <h2>Create your account</h2>
+        
+        <form>
+            <div class="account-type">
+                <input type="radio" id="artist" name="account-type" value="artist" checked>
+                <label for="artist">Artist (£3/month)</label>
+                
+                <input type="radio" id="pro" name="account-type" value="pro">
+                <label for="pro">Industry Pro (£5/month)</label>
+            </div>
+            
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Your name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="your@email.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" placeholder="••••••••" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="role">Primary Role</label>
+                <select id="role" required>
+                    <option value="">Select your role</option>
+                    <option value="musician">Musician</option>
+                    <option value="producer">Producer</option>
+                    <option value="engineer">Audio Engineer</option>
+                    <option value="label">Label Representative</option>
+                    <option value="manager">Artist Manager</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="cta-button">Start Free Trial</button>
+            
+            <div class="login-link">
+                Already have an account? <a href="login.html">Log in</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

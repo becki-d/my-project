@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MU.SYNC | Next-Gen Music Collaboration</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg-dark: #272727;
+            --font-cream: #fffaf3;
+            --accent-purple: #9c4dff;
+            --accent-orange: #ff7d3a;
+            --card-dark: #1e1e1e;
+            --hover-light: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--font-cream);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Glassmorphism Navbar */
+        header {
+            background: rgba(39, 39, 39, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 250, 243, 0.1);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--font-cream);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Hero Section with Animated Gradient */
+        .hero {
+            text-align: center;
+            padding: 8rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(156, 77, 255, 0.1) 0%, rgba(39, 39, 39, 0) 70%);
+            animation: pulse 8s infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 0.2; }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--font-cream), #d4d4d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Pricing Cards (Glassmorphism) */
+        .pricing {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 3rem 5%;
+            flex-wrap: wrap;
+        }
+
+        .pricing-card {
+            background: rgba(30, 30, 30, 0.6);
+            border: 1px solid rgba(255, 250, 243, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            width: 300px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(156, 77, 255, 0.2);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 1rem 0;
+            color: var(--accent-purple);
+        }
+
+        .price span {
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .pricing-features li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--accent-purple);
+        }
+
+        /* CTA Buttons (Neon Glow Effect) */
+        .cta-button {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-orange));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(156, 77, 255, 0.5);
+        }
+
+        .cta-button:hover {
+            box-shadow: 0 0 25px rgba(156, 77, 255, 0.8);
+            transform: scale(1.05);
+        }
+
+        /* Feature Showcase (Grid Layout) with Boomerang Animation */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 5%;
+        }
+
+        .feature-card {
+            background: var(--card-dark);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(135deg, 
+                    transparent 0%, 
+                    rgba(156, 77, 255, 0.03) 30%, 
+                    transparent 70%);
+            z-index: -1;
+            animation: boomerang 8s infinite linear;
+            opacity: 0.3;
+        }
+
+        @keyframes boomerang {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            50% { transform: translateX(100%) translateY(100%); }
+            100% { transform: translateX(-100%) translateY(-100%); }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(145deg, var(--card-dark), #252525);
+        }
+
+        .feature-card:hover::before {
+            opacity: 0.5;
+        }
+
+        /* Enhanced Icon Styling */
+        .feature-icon {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-purple);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background: rgba(156, 77, 255, 0.1);
+            border-radius: 50%;
+            border: 1px solid rgba(156, 77, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .feature-card:hover .feature-icon {
+            background: rgba(156, 77, 255, 0.2);
+            transform: rotate(8deg) scale(1.1);
+            box-shadow: 0 0 20px rgba(156, 77, 255, 0.3);
+            border-color: rgba(156, 77, 255, 0.4);
+        }
+
+        /* Community Section */
+        #community {
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        #community h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        #community p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer (Minimalist) */
+        footer {
+            background: rgba(20, 20, 20, 0.8);
+            text-align: center;
+            padding: 3rem 5%;
+            border-top: 1px solid rgba(255, 250, 243, 0.1);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--font-cream);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        /* Section IDs for scrolling with proper offset */
+        section {
+            scroll-margin-top: 120px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo" onclick="window.location.href='index.html'">MU.SYNC</div>
+        <nav class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#community">Community</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <h1>Create. Collaborate. Release.</h1>
+        <p>The ultimate cloud-based DAW for musicians and industry professionals. Streamline your workflow from composition to marketing.</p>
+        <button class="cta-button" onclick="window.location.href='signup.html'">Start Free Trial</button>
+        <button class="cta-button">Explore Demo</button>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="pricing-card">
+            <h3>Artist</h3>
+            <div class="price">£3<span>/month</span></div>
+            <ul class="pricing-features">
+                <li>Unlimited projects</li>
+                <li>Cloud DAW access</li>
+                <li>Basic collaboration tools</li>
+                <li>10GB storage</li>
+                <li>Standard plugins</li>
+            </ul>
+            <button class="cta-button" onclick="window.location.href='signup.html'">Get Started</button>
+        </div>
+        <div class="pricing-card">
+            <h3>Industry Pro</h3>
+            <div class="price">£5<span>/month</span></div>
+            <ul class="pricing-features">
+                <li>Advanced analytics</li>
+                <li>Priority support</li>
+                <li>10GB storage</li>
+                <li>Premium plugins</li>
+                <li>Industry networking</li>
+            </ul>
+            <button class="cta-button" onclick="window.location.href='signup.html'">Upgrade Now</button>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-cloud-music"></i></div>
+            <h3>Cloud DAW</h3>
+            <p>Full-featured digital audio workstation with real-time collaboration.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-users-cog"></i></div>
+            <h3>Team Workflow</h3>
+            <p>Invite producers, mixers, and A&Rs to streamline your project.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-chart-network"></i></div>
+            <h3>Release Analytics</h3>
+            <p>Track streams, sales, and engagement in one dashboard.</p>
+        </div>
+    </section>
+
+    <section id="community">
+        <h2>Join Our Community</h2>
+        <p>Connect with thousands of musicians, producers, and industry professionals worldwide.</p>
+        <button class="cta-button" onclick="window.location.href='community.html'">Explore Community Wall</button>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">About</a>
+            <a href="#">Blog</a>
+            <a href="#">Support</a>
+            <a href="#">API</a>
+        </div>
+        <p>© 2023 MU.SYNC | Revolutionizing music collaboration</p>
+    </footer>
+
+    <!-- Enhanced Smooth Scrolling Script with Proper Offset -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                    const startPosition = window.pageYOffset;
+                    const distance = targetPosition - startPosition;
+                    const duration = 1200;
+                    let startTime = null;
+
+                    function animation(currentTime) {
+                        if (startTime === null) startTime = currentTime;
+                        const timeElapsed = currentTime - startTime;
+                        const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+                        window.scrollTo(0, run);
+                        if (timeElapsed < duration) requestAnimationFrame(animation);
+                    }
+
+                    function easeInOutQuad(t, b, c, d) {
+                        t /= d/2;
+                        if (t < 1) return c/2*t*t + b;
+                        t--;
+                        return -c/2 * (t*(t-2) - 1) + b;
+                    }
+
+                    requestAnimationFrame(animation);
+                }
+            });
+        });
+
+        // Bonus: Add subtle parallax effect to hero section
+        window.addEventListener('scroll', function() {
+            const hero = document.querySelector('.hero');
+            const scrollPosition = window.pageYOffset;
+            hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+        });
+    </script>
+</body>
+</html>
