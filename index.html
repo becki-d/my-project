@@ -380,79 +380,84 @@
 <!-- CONTACT FORM -->
 <section id="contact" class="contact-section">
     <h2>Contact Us</h2>
-    <div class="contact-form-container">
-        <form id="contact-form" class="contact-form" method="POST">
-            <!-- Left Column -->
-            <div class="form-group">
-                <div class="input-container">
-                    <input type="text" id="first-name" name="first-name" required 
-                           minlength="2" maxlength="50" placeholder=" "
-                           pattern="[A-Za-z]+" title="Letters only">
-                    <label for="first-name">First Name</label>
-                </div>
+    <form id="contact-form" class="contact-form" method="POST">
+        <!-- First Name (Top Left) -->
+        <div class="form-group first-name">
+            <div class="input-container">
+                <input type="text" id="first-name" name="first-name" required 
+                       minlength="2" maxlength="50" placeholder=" "
+                       pattern="[A-Za-z]+" title="Letters only">
+                <label for="first-name">First Name</label>
+            </div>
+        </div>
+
+        <!-- Last Name (Top Right) -->
+        <div class="form-group last-name">
+            <div class="input-container">
+                <input type="text" id="last-name" name="last-name" required
+                       minlength="2" maxlength="50" placeholder=" "
+                       pattern="[A-Za-z]+" title="Letters only">
+                <label for="last-name">Last Name</label>
+            </div>
+        </div>
+
+        <!-- Email (Bottom Left) -->
+        <div class="form-group email">
+            <div class="input-container">
+                <input type="email" id="email" name="email" required
+                       maxlength="100" placeholder=" ">
+                <label for="email">Email</label>
             </div>
 
-            <div class="form-group">
-                <div class="input-container">
-                    <input type="text" id="last-name" name="last-name" required
-                           minlength="2" maxlength="50" placeholder=" "
-                           pattern="[A-Za-z]+" title="Letters only">
-                    <label for="last-name">Last Name</label>
-                </div>
-            </div>
 
-            <!-- Right Column -->
-            <div class="form-group">
-                <div class="input-container">
-                    <input type="email" id="email" name="email" required
-                           maxlength="100" placeholder=" ">
-                    <label for="email">Email</label>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <div class="input-container">
-                    <input type="text" id="subject" name="subject" required
-                           maxlength="150" placeholder=" ">
-                    <label for="subject">Subject</label>
-                </div>
-            </div>
 
-            <!-- Message -->
-            <div class="form-group message">
-                <div class="input-container">
-                    <textarea id="message" name="message" required placeholder=" "></textarea>
-                    <label for="message">Message</label>
-                </div>
-            </div>
+        <!-- Attachment (Left Column, bottom) -->
+        <div class="form-group attachment">
+            <button type="button" class="attachment-button" onclick="document.getElementById('file-input').click()">
+                <i class="fas fa-paperclip"></i> Add Attachment
+            </button>
+            <input type="file" id="file-input" name="attachment" style="display: none;">
+        </div>
 
-            <!-- Attachment - Fixed button -->
-            <div class="form-group attachment">
-                <div class="attachment-wrapper">
-                    <label for="file-input" class="attachment-button">Add Attachment</label>
-                    <input type="file" id="file-input" name="attachment">
-                    <span class="attachment-filename" id="filename">No file chosen</span>
-                </div>
+        </div>
+    
+        
+        <!-- Subject (Full Width) -->
+        <div class="form-group subject">
+            <div class="input-container">
+                <input type="text" id="subject" name="subject" required
+                       maxlength="100" placeholder=" ">
+                <label for="subject">Subject</label>
             </div>
+        </div>
 
-            <!-- Terms -->
-            <div class="form-group terms">
-                <div class="terms-checkbox">
-                    <input type="checkbox" id="terms" name="terms" required>
-                    <span class="terms-text">
-                        I've read and agree with the <a href="/terms" target="_blank">Terms Of Service</a> 
-                        and <a href="/privacy" target="_blank">Privacy Policy</a>
-                    </span>
-                </div>
+        <!-- Message (Full Width) -->
+        <div class="form-group message">
+            <div class="input-container">
+                <textarea id="message" name="message" required placeholder=" "></textarea>
+                <label for="message">Message</label>
             </div>
+        
 
-            <!-- Submit -->
-            <div class="button-container">
-                <button type="submit" class="cta-button">Send Message</button>
+        <!-- Terms (Full Width) -->
+        <div class="form-group terms">
+            <div class="terms-checkbox">
+                <input type="checkbox" id="terms" name="terms" required>
+                <span class="terms-text">
+                    I've read and agree with the <a href="/terms" target="_blank">Terms Of Service</a> 
+                    and <a href="/privacy" target="_blank">Privacy Policy</a>
+                </span>
             </div>
-        </form>
-    </div>
+    
+        <!-- Submit Button (Right Column) -->
+        <div class="button-container">
+            <button type="submit" class="cta-button">Send Message</button>
+        </div>
+    </form>
 </section>
+
+
+
 
 <!-- Fixed hCaptcha Modal -->
 <div class="hcaptcha-modal" id="hcaptcha-modal">
@@ -529,6 +534,8 @@
             });
         });
 
+
+        
         // Bonus: Add subtle parallax effect to hero section
         window.addEventListener('scroll', function() {
             const hero = document.querySelector('.hero');
@@ -599,7 +606,17 @@
     document.getElementById('file-input').addEventListener('change', function(e) {
         const fileName = e.target.files[0] ? e.target.files[0].name : 'No file chosen';
         document.getElementById('filename').textContent = fileName;
+        
+        // Optional: Add file type validation
+        const validTypes = ['image/jpeg', 'image/png', 'application/pdf', 'audio/mpeg'];
+        if (e.target.files[0] && !validTypes.includes(e.target.files[0].type)) {
+            alert('Please select a valid file type (JPEG, PNG, PDF, or MP3)');
+            e.target.value = '';
+            document.getElementById('filename').textContent = 'No file chosen';
+        }
     });
+
+
 
     // hCaptcha modal handlers
     const modal = document.getElementById('hcaptcha-modal');
@@ -609,7 +626,11 @@
     // Form submission handler
     document.getElementById('contact-form').addEventListener('submit', function(e) {
         e.preventDefault();
-        modal.style.display = 'flex';
+        if (this.checkValidity()) {
+            modal.style.display = 'flex';
+        } else {
+            this.reportValidity();
+        }
     });
 </script>
 
