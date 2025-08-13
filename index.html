@@ -376,12 +376,11 @@
         <p>Connect with thousands of musicians, producers, and industry professionals worldwide.</p>
         <button class="cta-button" onclick="window.location.href='community.html'">Explore Community Wall</button>
     </section>
-
 <!-- CONTACT FORM -->
 <section id="contact" class="contact-section">
     <h2>Contact Us</h2>
     <form id="contact-form" class="contact-form" method="POST">
-        <!-- First Name (Top Left) -->
+        <!-- First Name -->
         <div class="form-group first-name">
             <div class="input-container">
                 <input type="text" id="first-name" name="first-name" required 
@@ -391,7 +390,7 @@
             </div>
         </div>
 
-        <!-- Last Name (Top Right) -->
+        <!-- Last Name -->
         <div class="form-group last-name">
             <div class="input-container">
                 <input type="text" id="last-name" name="last-name" required
@@ -401,17 +400,7 @@
             </div>
         </div>
 
-        <!-- Email (Bottom Left) -->
-        <div class="form-group email">
-            <div class="input-container">
-                <input type="email" id="email" name="email" required
-                       maxlength="100" placeholder=" ">
-                <label for="email">Email</label>
-            </div>
-
-
-
-        <!-- Attachment (Left Column, bottom) -->
+        <!-- Attachment -->
         <div class="form-group attachment">
             <button type="button" class="attachment-button" onclick="document.getElementById('file-input').click()">
                 <i class="fas fa-paperclip"></i> Add Attachment
@@ -419,10 +408,16 @@
             <input type="file" id="file-input" name="attachment" style="display: none;">
         </div>
 
+        <!-- Email -->
+        <div class="form-group email">
+            <div class="input-container">
+                <input type="email" id="email" name="email" required
+                       maxlength="100" placeholder=" ">
+                <label for="email">Email</label>
+            </div>
         </div>
-    
         
-        <!-- Subject (Full Width) -->
+        <!-- Subject -->
         <div class="form-group subject">
             <div class="input-container">
                 <input type="text" id="subject" name="subject" required
@@ -431,15 +426,15 @@
             </div>
         </div>
 
-        <!-- Message (Full Width) -->
+        <!-- Message -->
         <div class="form-group message">
             <div class="input-container">
                 <textarea id="message" name="message" required placeholder=" "></textarea>
                 <label for="message">Message</label>
             </div>
-        
+        </div>
 
-        <!-- Terms (Full Width) -->
+        <!-- Terms -->
         <div class="form-group terms">
             <div class="terms-checkbox">
                 <input type="checkbox" id="terms" name="terms" required>
@@ -448,13 +443,30 @@
                     and <a href="/privacy" target="_blank">Privacy Policy</a>
                 </span>
             </div>
+        </div>
     
-        <!-- Submit Button (Right Column) -->
+        <!-- Submit Button -->
         <div class="button-container">
             <button type="submit" class="cta-button">Send Message</button>
         </div>
     </form>
 </section>
+
+
+
+<!-- Single hCaptcha Modal -->
+<div class="hcaptcha-modal" id="hcaptcha-modal">
+    <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h3>Please verify you're human</h3>
+        <p>Complete the hCaptcha to continue</p>
+        <div class="h-captcha" data-sitekey="your-site-key"></div>
+        <div class="modal-buttons">
+            <button class="cta-button" id="verify-btn">Verify</button>
+            <button class="cta-button secondary" id="cancel-btn">Cancel</button>
+        </div>
+    </div>
+</div>
 
 
 
