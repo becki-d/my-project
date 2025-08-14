@@ -176,6 +176,7 @@
 }
 
 /* Attachment Button */
+
 .contact-form .attachment-button {
     display: inline-block;
     padding: 1rem 1.5rem;
@@ -189,6 +190,29 @@
     min-width: 180px;
     text-align: center;
 }
+
+.contact-form .attachment-button {
+    width: 100%;
+    box-sizing: border-box; /* Include padding in width calculation */
+    min-width: auto; /* Remove fixed min-width */
+    text-align: center;
+}
+
+/* Ensure the attachment container matches other form groups */
+.contact-form .form-group.attachment {
+    display: block; /* Change from flex to block */
+}
+
+/* On mobile, make sure it stays full width */
+@media (max-width: 768px) {
+    .contact-form .attachment-button {
+        width: 100%;
+    }
+}
+
+
+
+
 
 /* Terms Checkbox - Left Aligned */
 .contact-form .terms-checkbox {
@@ -297,5 +321,23 @@
 }
 
 
+/* Tick Box Contact Form - Text (Links) */
 
 
+.contact-form .terms-text a {
+    color: var(--font-cream);
+    text-decoration: underline;
+    transition: color 0.3s;
+}
+
+.contact-form .terms-text a:hover {
+    color: var(--accent-purple);
+    text-decoration: underline;
+}
+
+
+/* Ensure contact section soft scrolls further into section */
+#contact {
+    scroll-margin-top: 100px; /* header height minus 10px */
+    padding-top: 1px; /* extra padding to prevent cutting off content */
+}

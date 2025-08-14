@@ -376,6 +376,8 @@
         <p>Connect with thousands of musicians, producers, and industry professionals worldwide.</p>
         <button class="cta-button" onclick="window.location.href='community.html'">Explore Community Wall</button>
     </section>
+
+    
 <!-- CONTACT FORM -->
 <section id="contact" class="contact-section">
     <h2>Contact Us</h2>
@@ -468,23 +470,6 @@
     </div>
 </div>
 
-
-
-
-<!-- Fixed hCaptcha Modal -->
-<div class="hcaptcha-modal" id="hcaptcha-modal">
-    <div class="modal-content">
-        <button class="modal-close">&times;</button>
-        <h3>Please verify you're human</h3>
-        <p>Complete the hCaptcha to continue</p>
-        <div class="h-captcha" data-sitekey="your-site-key"></div>
-        <div class="modal-buttons">
-            <button class="cta-button" id="verify-btn">Verify</button>
-            <button class="cta-button secondary" id="cancel-btn">Cancel</button>
-        </div>
-    </div>
-</div>
-
 <!-- Fixed hCaptcha Modal -->
 <div class="hcaptcha-modal" id="hcaptcha-modal">
     <div class="modal-content">
@@ -510,7 +495,8 @@
         <p>© 2023 MU.SYNC | Revolutionizing music collaboration</p>
     </footer>
 
-    <!-- Enhanced Smooth Scrolling Script with Proper Offset -->
+
+
     <script>
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -545,15 +531,58 @@
                 }
             });
         });
-
-
         
-        // Bonus: Add subtle parallax effect to hero section
-        window.addEventListener('scroll', function() {
-            const hero = document.querySelector('.hero');
-            const scrollPosition = window.pageYOffset;
-            hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+
+
+    // Enhanced Smooth Scrolling with Custom Offset for Contact Section
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                let additionalOffset = 20; // Default offset for most sections
+                
+                // Custom offset for Contact section
+                if (targetId === '#contact') {
+                    additionalOffset = -10; // -10px for Contact section
+                }
+                
+                const targetPosition = targetElement.getBoundingClientRect().top + 
+                                      window.pageYOffset - 
+                                      headerHeight - 
+                                      additionalOffset;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Update URL without jumping
+                history.pushState(null, null, targetId);
+            }
         });
+    });
+
+    // Bonus: Add subtle parallax effect to hero section
+    window.addEventListener('scroll', function() {
+        const hero = document.querySelector('.hero');
+        const scrollPosition = window.pageYOffset;
+        hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+    });
+
+
+
+    // Bonus: Add subtle parallax effect to hero section
+    window.addEventListener('scroll', function() {
+        const hero = document.querySelector('.hero');
+        const scrollPosition = window.pageYOffset;
+        hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+    });
+
+
     </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
