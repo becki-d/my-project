@@ -6,9 +6,8 @@
     <title>MU.SYNC | Create Account</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <script src="https://js.stripe.com/v3/"></script>
     <style>
-        /* Restored original signup styles with adjustments */
         :root {
             --bg-dark: #272727;
             --font-cream: #fffaf3;
@@ -85,7 +84,6 @@
             box-sizing: border-box;
         }
 
-        /* Specifically widened the dropdown */
         select {
             appearance: none;
             -webkit-appearance: none;
@@ -102,7 +100,6 @@
             box-shadow: 0 0 0 2px rgba(156, 77, 255, 0.2);
         }
 
-        /* Updated button to match input width */
         .cta-button {
             background: linear-gradient(90deg, var(--accent-purple), var(--accent-orange));
             color: white;
@@ -125,8 +122,7 @@
         .account-type {
             display: flex;
             gap: 1rem;
-            margin-bottom: 1.5rem;
-            margin-top: 3rem;
+            margin: 3rem 0 1.5rem 0;
         }
 
         .account-type label {
@@ -158,6 +154,56 @@
             text-decoration: none;
             font-weight: 500;
         }
+
+        /* Stripe Elements styling */
+        #payment-form {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, margin 0.5s ease;
+        }
+
+        #payment-form.visible {
+            max-height: 500px;
+            margin: 1.5rem 0;
+        }
+
+        .payment-title {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        #card-element {
+            background: rgba(255, 250, 243, 0.05);
+            border: 1px solid rgba(255, 250, 243, 0.1);
+            border-radius: 8px;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        #card-errors {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            min-height: 1.2rem;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -165,7 +211,7 @@
         <div class="logo">MU.SYNC</div>
         <h2>Create your account</h2>
         
-        <form>
+        <form id="signup-form">
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" placeholder="Your name" required>
@@ -207,12 +253,135 @@
                 <label for="pro">Industry Pro (£5/month)</label>
             </div>
             
-            <button type="submit" class="cta-button">Start Free Trial</button>
+            <!-- Stripe Payment Form -->
+            <div id="payment-form">
+                <div class="payment-title">Enter payment details to start your free trial</div>
+                <div id="card-element"></div>
+                <div id="card-errors" role="alert"></div>
+            </div>
+            
+            <button type="submit" class="cta-button" id="submit-button">
+                <span id="button-text">Start Free Trial</span>
+                <span class="spinner" id="spinner"></span>
+            </button>
             
             <div class="login-link">
                 Already have an account? <a href="login.html">Log in</a>
             </div>
         </form>
     </div>
+
+    <script>
+        // Initialize Stripe with your publishable key
+        const stripe = Stripe('pk_test_your_publishable_key_here'); // Replace with your actual test key
+        
+        // Create Stripe elements
+        const elements = stripe.elements();
+        const cardElement = elements.create('card', {
+            style: {
+                base: {
+                    color: '#fffaf3',
+                    fontFamily: '"Inter", sans-serif',
+                    fontSmoothing: 'antialiased',
+                    fontSize: '16px',
+                    '::placeholder': {
+                        color: 'rgba(255, 250, 243, 0.5)'
+                    }
+                },
+                invalid: {
+                    color: '#ff6b6b',
+                    iconColor: '#ff6b6b'
+                }
+            }
+        });
+        
+        cardElement.mount('#card-element');
+        
+        // Handle real-time validation errors from the card Element
+        cardElement.on('change', function(event) {
+            const displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+        
+        // Handle account type selection
+        const accountTypeRadios = document.querySelectorAll('input[name="account-type"]');
+        const paymentForm = document.getElementById('payment-form');
+        
+        accountTypeRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                paymentForm.classList.add('visible');
+            });
+        });
+        
+        // Form submission
+        const form = document.getElementById('signup-form');
+        const submitButton = document.getElementById('submit-button');
+        const buttonText = document.getElementById('button-text');
+        const spinner = document.getElementById('spinner');
+        
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            // Show loading state
+            buttonText.textContent = 'Processing...';
+            spinner.style.display = 'block';
+            submitButton.disabled = true;
+            
+            // Get the selected account type and price
+            const accountType = document.querySelector('input[name="account-type"]:checked').value;
+            const amount = accountType === 'artist' ? 300 : 500; // in pence/cents
+            
+            try {
+                // Create payment intent on your server (you'll need to implement this)
+                // const response = await fetch('/create-payment-intent', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //     },
+                //     body: JSON.stringify({
+                //         amount: amount,
+                //         currency: 'gbp'
+                //     })
+                // });
+                // const { clientSecret } = await response.json();
+                
+                // For demo purposes, we'll simulate this
+                const clientSecret = 'simulated_client_secret';
+                
+                // Confirm card payment
+                const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+                    payment_method: {
+                        card: cardElement,
+                        billing_details: {
+                            name: document.getElementById('name').value,
+                            email: document.getElementById('email').value
+                        }
+                    }
+                });
+                
+                if (error) {
+                    // Show error to customer
+                    document.getElementById('card-errors').textContent = error.message;
+                    buttonText.textContent = 'Start Free Trial';
+                    spinner.style.display = 'none';
+                    submitButton.disabled = false;
+                } else {
+                    // Payment succeeded - submit form to your server
+                    alert(`Payment successful! Account type: ${accountType}`);
+                    // form.submit(); // Uncomment to actually submit the form
+                }
+            } catch (err) {
+                console.error('Error:', err);
+                document.getElementById('card-errors').textContent = 'An unexpected error occurred. Please try again.';
+                buttonText.textContent = 'Start Free Trial';
+                spinner.style.display = 'none';
+                submitButton.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>
