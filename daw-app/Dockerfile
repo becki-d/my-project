@@ -1,7 +1,7 @@
-FROM node:18
+FROM node:18-alpine
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
 EXPOSE 3001
-CMD ["npm", "start"]
+CMD node server/server.js  # ← REMOVE the brackets and quotes
